@@ -1,26 +1,23 @@
 package com.company;
 
 
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 public class Main {
     private static Logger logger = Logger.getLogger(Math.class.getName());
 
     public static void main(String[] args) {
-        logger.info(String.valueOf(getSum1(1,2,3,4,5)));
+        logger.info(String.valueOf(getSum1(12345)));
         logger.info(String.valueOf(getSum2(12345)));
 
-        int result = getMaxPalindrome(1331, 2442);
-        logger.info("Max palindrome is " + result);
+        int result = getMaxPalindrome();
+        logger.info(String.valueOf(result));
 
     }
 
-    public static int getSum1(Integer ... number){
-        int result = 0;
-        for (Integer a : number) {
-            result += a;
-        }
-        return result;
+    public static int getSum1(int number){
+        return (number % 10) + (number % 100 / 10) + (number % 1000 / 100) + (number % 10000 / 1000) + (number % 100000 / 10000);
     }
 
 
@@ -37,23 +34,25 @@ public class Main {
 
 
 
-    private static int getMaxPalindrome(int number, int number2) {
-        for (int a = number; a > number/10; a--) {
-            for (int b = number2; b > number2/10; b--) {
-                int result = a * b;
-                if (isPalindrome(result)) {
-                    return result;
+    public static int getMaxPalindrome() {
+        int max;
+        String strResult;
+        int result = 0;
+        char[] chars;
+        char[] chars1;
+        for ( int i = 1000; i < 10000; i++){
+            for (int x = 1000; x < 10000; x++){
+                max = i * x;
+                String str = String.valueOf(max);
+                StringBuilder stb = new StringBuilder(str).reverse();
+                chars = str.toCharArray();
+                chars1 = String.valueOf(stb).toCharArray();
+                if ( Arrays.equals(chars, chars1)){
+                    strResult = new String(chars, 0, chars.length);
+                    result = Integer.parseInt(strResult);
                 }
             }
         }
-        return -1;
-    }
-    private static boolean isPalindrome(int result) {
-        final String str = String.valueOf(result);
-        int length = str.length();
-        for (int i = 0; i < length / 2; i++) {
-            if (str.charAt(i) != str.charAt(length - 1 - i)) return false;
-        }
-        return true;
+        return result;
     }
 }
