@@ -10,6 +10,11 @@ class MainTest {
         int result = Main.getSum1(12345);
         assertEquals(15, result);
     }
+    @Test
+    void getSumFirst15next() {
+        int result = Main.getSum1(123);
+        assertEquals(6, result);
+    }
 
     @Test
     void getSumSecond15() {

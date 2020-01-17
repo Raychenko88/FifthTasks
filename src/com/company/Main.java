@@ -1,7 +1,6 @@
 package com.company;
 
 
-import java.util.Arrays;
 import java.util.logging.Logger;
 
 public class Main {
@@ -17,7 +16,16 @@ public class Main {
     }
 
     public static int getSum1(int number){
-        return (number % 10) + (number % 100 / 10) + (number % 1000 / 100) + (number % 10000 / 1000) + (number % 100000 / 10000);
+        String str = String.valueOf(number);
+        int result = 0;
+        int remainder = 10;
+        int division = 1;
+        for (int i = 0; i < str.length(); i++){
+            result += (number % remainder / division);
+            remainder *= 10;
+            division *= 10;
+        }
+        return result;
     }
 
 
@@ -34,25 +42,21 @@ public class Main {
 
 
 
-    public static int getMaxPalindrome() {
-        int max;
-        String strResult;
-        int result = 0;
-        char[] chars;
-        char[] chars1;
-        for ( int i = 1000; i < 10000; i++){
-            for (int x = 1000; x < 10000; x++){
-                max = i * x;
-                String str = String.valueOf(max);
-                StringBuilder stb = new StringBuilder(str).reverse();
-                chars = str.toCharArray();
-                chars1 = String.valueOf(stb).toCharArray();
-                if ( Arrays.equals(chars, chars1)){
-                    strResult = new String(chars, 0, chars.length);
-                    result = Integer.parseInt(strResult);
+    public static int getMaxPalindrome(){
+        int finish = 0;
+        for (int i = 9999; i > 999; i--){
+            for (int x = 9999; x > 999; x--){
+                String result = String.valueOf(i * x);
+                StringBuilder reverse = new StringBuilder(result).reverse();
+                if (result.equals(reverse.toString())){
+                    finish = Integer.parseInt(result);
+                    break;
                 }
             }
+            if (!(finish == 0)){
+                break;
+            }
         }
-        return result;
+        return finish;
     }
 }
